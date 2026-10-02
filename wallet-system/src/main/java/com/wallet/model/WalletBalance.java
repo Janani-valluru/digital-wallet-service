@@ -1,0 +1,30 @@
+package com.wallet.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Check;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "wallet_balances")
+@Check(constraints = "amount >= 0")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class WalletBalance implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Version
+    private Long version;
+
+    @Column(nullable = false)
+    private BigDecimal amount = BigDecimal.ZERO;
+}
